@@ -1,9 +1,9 @@
 {
   "diaryFont": "neucha",
   "diaryFontSize": 23,
-  "diaryLineHeight": 1.72,
-  "diaryParagraphGap": 1.05,
+  "diaryLineHeight": 1.3,
+  "diaryParagraphGap": 1.3,
   "diaryPagePadding": 52,
   "diaryPaper": "aged",
-  "diaryInk": "sepia"
+  "diaryInk": "faded"
 }
