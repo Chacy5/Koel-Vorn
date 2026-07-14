@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { withBase } from '../../lib/paths';
+import TagList from '../../components/TagList.astro';
+import ArchiveMap from '../../components/ArchiveMap.astro';
+const places = await getCollection('places');
+---
+<ContentLayout title="Места" description="Города, замки и временные убежища, которые Баровия позволяет помнить.">
+  <ArchiveMap />
+  <div class="archive-grid">{places.map(({data})=><article class="archive-card">{data.image&&<img src={withBase(data.image)} alt="" />}<small>{data.region}</small><h2><a href={withBase(`/places/${data.slug}`)}>{data.name}</a></h2><TagList tags={data.tags} /></article>)}</div>
+</ContentLayout>
+<style>img{width:100%;height:190px;object-fit:cover;margin-bottom:1rem;filter:saturate(.7) brightness(.8)}</style>

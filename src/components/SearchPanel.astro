@@ -1,0 +1,70 @@
+---
+interface SearchItem { type: string; title: string; subtitle: string; href: string; keywords: string }
+interface Props { items: SearchItem[] }
+const { items } = Astro.props;
+---
+<section class="search-panel" aria-labelledby="search-title" data-search-panel data-items={JSON.stringify(items)}>
+  <h2 id="search-title">Поиск</h2>
+  <div class="search-tabs" role="tablist" aria-label="Область поиска">
+    <button type="button" role="tab" aria-selected="true" data-mode="characters">Персонажи</button>
+    <button type="button" role="tab" aria-selected="false" data-mode="all">Все тексты</button>
+  </div>
+  <label>
+    <span class="sr-only">Поисковый запрос</span>
+    <i aria-hidden="true">⌕</i>
+    <input type="search" placeholder="Имя, место или слово…" autocomplete="off" data-search-input />
+  </label>
+  <p class="search-hint">Начните вводить — совпадения появятся здесь.</p>
+  <div class="results" data-search-results aria-live="polite"></div>
+</section>
+
+<script>
+  import { withBase } from '../lib/paths';
+  document.querySelectorAll<HTMLElement>('[data-search-panel]').forEach((panel) => {
+    const input = panel.querySelector<HTMLInputElement>('[data-search-input]');
+    const results = panel.querySelector<HTMLElement>('[data-search-results]');
+    const hint = panel.querySelector<HTMLElement>('.search-hint');
+    const tabs = [...panel.querySelectorAll<HTMLButtonElement>('[data-mode]')];
+    const items = JSON.parse(panel.dataset.items || '[]') as Array<{ type: string; title: string; subtitle: string; href: string; keywords: string }>;
+    let mode = 'characters';
+    const saved = localStorage.getItem('koel-vorn-search') || '';
+    if (input && saved) input.value = saved;
+    const render = () => {
+      if (!input || !results || !hint) return;
+      const query = input.value.trim().toLocaleLowerCase('ru');
+      localStorage.setItem('koel-vorn-search', input.value);
+      if (query.length < 2) { results.innerHTML = ''; hint.hidden = false; return; }
+      const found = items.filter((item) => (mode === 'all' || item.type === 'Персонаж') && `${item.title} ${item.subtitle} ${item.keywords}`.toLocaleLowerCase('ru').includes(query)).slice(0, 7);
+      hint.hidden = true;
+      results.innerHTML = found.length ? found.map((item) => `<a href="${withBase(item.href)}"><small>${item.type}</small><strong>${item.title}</strong><span>${item.subtitle}</span></a>`).join('') : '<p class="empty">Ничего не найдено.</p>';
+    };
+    tabs.forEach((tab) => tab.addEventListener('click', () => {
+      mode = tab.dataset.mode || 'characters';
+      tabs.forEach((item) => item.setAttribute('aria-selected', String(item === tab)));
+      render();
+    }));
+    input?.addEventListener('input', render);
+    render();
+  });
+</script>
+
+<style>
+  .search-panel { padding: 1.55rem; }
+  h2 { margin: 0 0 1rem; color: var(--text-bright); font-family: var(--font-display); font-size: 1.55rem; font-weight: 400; }
+  .search-tabs { display: flex; gap: 1rem; margin-bottom: .75rem; border-bottom: 1px solid var(--border); }
+  .search-tabs button { padding: 0 0 .55rem; border: 0; border-bottom: 1px solid transparent; background: none; color: var(--text-muted); font: inherit; font-size: .76rem; cursor: pointer; }
+  .search-tabs button[aria-selected='true'] { color: var(--gold); border-bottom-color: var(--gold); }
+  label { display: grid; grid-template-columns: 1.2rem 1fr; align-items: center; gap: .35rem; padding: .15rem .75rem; border: 1px solid var(--border); background: #131210; }
+  label:focus-within { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(182,154,99,.12); }
+  label i { color: var(--gold-dark); font-style: normal; }
+  input { width: 100%; min-height: 42px; border: 0; outline: 0; color: var(--text-main); background: transparent; font: inherit; font-size: .82rem; }
+  input::placeholder { color: #756f68; }
+  .search-hint { margin: .7rem 0 0; color: #6f6962; font-size: .72rem; }
+  .results { display: grid; margin-top: .6rem; }
+  .results :global(a) { display: grid; padding: .65rem 0; border-bottom: 1px solid var(--border); text-decoration: none; }
+  .results :global(a:hover strong) { color: var(--gold); }
+  .results :global(small) { color: var(--gold-dark); font-size: .62rem; text-transform: uppercase; letter-spacing: .08em; }
+  .results :global(strong) { color: var(--text-main); font-family: var(--font-display); font-weight: 500; }
+  .results :global(span) { color: var(--text-muted); font-size: .68rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .results :global(.empty) { color: var(--text-muted); font-size: .8rem; }
+</style>

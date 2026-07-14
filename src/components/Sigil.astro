@@ -1,0 +1,15 @@
+---
+interface Props { small?: boolean }
+const { small = false } = Astro.props;
+---
+<span class:list={["sigil", { "sigil--small": small }]} aria-hidden="true">
+  <i></i><b>✦</b><i></i>
+</span>
+
+<style>
+  .sigil { display: inline-grid; grid-template-rows: 1fr auto 1fr; place-items: center; width: 2.4rem; height: 3.3rem; color: var(--red-light); filter: drop-shadow(0 0 7px rgba(109,38,38,.5)); }
+  .sigil i { width: 1px; height: 100%; background: linear-gradient(transparent, var(--gold-dark)); }
+  .sigil b { font-size: 1.15rem; font-weight: 400; line-height: 1; }
+  .sigil--small { width: 1.5rem; height: 2rem; }
+  .sigil--small b { font-size: .8rem; }
+</style>

@@ -1,0 +1,39 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+import { withBase } from '../lib/paths';
+interface Props { title?: string; description?: string }
+const { title = 'Коэл Ворн — личная хроника', description = 'Личная хроника эладрина и хранителя врат Коэла Ворна: дневники, персонажи, отношения и события Баровии.' } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+---
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#11100f" />
+    <link rel="icon" type="image/svg+xml" href={withBase('/favicon.svg')} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(withBase('/images/koel-hero.png'), Astro.site)} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Перейти к содержимому</a>
+    <Header />
+    <slot />
+    <Footer />
+    <button class="to-top" type="button" aria-label="Наверх" title="Наверх">↑</button>
+    <script>
+      const button = document.querySelector<HTMLButtonElement>('.to-top');
+      const update = () => button?.classList.toggle('is-visible', scrollY > 700);
+      addEventListener('scroll', update, { passive: true });
+      button?.addEventListener('click', () => scrollTo({ top: 0, behavior: 'smooth' }));
+      update();
+    </script>
+  </body>
+</html>

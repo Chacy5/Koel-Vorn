@@ -1,0 +1,14 @@
+---
+import { withBase } from '../lib/paths';
+import { normalizeTag } from '../lib/tags';
+interface Props { tags: string[]; label?: string }
+const { tags, label = 'Теги' } = Astro.props;
+const unique = [...new Set(tags.filter(Boolean).map(normalizeTag))];
+---
+{unique.length > 0 && <ul class="tag-list" aria-label={label}>{unique.map((tag) => <li><a href={withBase(`/tags/${encodeURIComponent(tag)}`)}>#{tag}</a></li>)}</ul>}
+<style>
+  .tag-list { display:flex; flex-wrap:wrap; gap:.45rem; padding:0; list-style:none; }
+  .tag-list li { padding:0; border:0; }
+  .tag-list a { display:block; padding:.32rem .58rem; border:1px solid var(--border); color:var(--text-muted); text-decoration:none; font-size:.73rem; transition:.2s; }
+  .tag-list a:hover { color:var(--gold); border-color:var(--gold); background:rgba(182,154,99,.06); }
+</style>

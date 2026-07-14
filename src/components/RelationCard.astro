@@ -1,0 +1,34 @@
+---
+import RelationMeter from './RelationMeter.astro';
+import { withBase } from '../lib/paths';
+import { resolveCharacterImage } from '../lib/characterImages';
+import CharacterImage from './CharacterImage.astro';
+interface Props { name: string; slug: string; role: string; image?: string; label: string; positive: number; negative: number }
+const { name, slug, role, image, label, positive, negative } = Astro.props;
+const resolvedImage = resolveCharacterImage({ slug, image });
+---
+<article class="relation-card reveal-card">
+  <a href={withBase(`/characters/${slug}`)} class="portrait">
+    <CharacterImage name={name} src={resolvedImage ? withBase(resolvedImage) : undefined} />
+    <i></i>
+  </a>
+  <div class="info">
+    <p class="role">{role}</p>
+    <h3><a href={withBase(`/characters/${slug}`)}>{name}</a></h3>
+    <p class="label">{label}</p>
+    <RelationMeter {positive} {negative} compact />
+  </div>
+</article>
+<style>
+  .relation-card { position: relative; min-width: 0; border: 1px solid var(--border); background: var(--bg-card); overflow: hidden; transition: transform .25s, border-color .25s; }
+  .relation-card:hover { transform: translateY(-4px); border-color: rgba(182,154,99,.56); }
+  .portrait { display: block; height: 205px; overflow: hidden; background: #121110; }
+  .portrait :global(img) { filter: saturate(.68) brightness(.78); transition: .35s; }
+  .relation-card:hover :global(img) { filter: saturate(.85) brightness(.92); transform: scale(1.025); }
+  .portrait i { position: absolute; inset: 105px 0 auto; height: 102px; background: linear-gradient(transparent, var(--bg-card)); pointer-events: none; }
+  .info { position: relative; padding: .3rem 1rem 1rem; }
+  .role { color: var(--gold); font-size: .72rem; text-transform: uppercase; letter-spacing: .1em; margin: 0 0 .2rem; }
+  h3 { margin: 0; font-family: var(--font-display); font-size: 1.55rem; font-weight: 500; }
+  h3 a { color: var(--text-bright); text-decoration: none; }
+  .label { min-height: 2.5em; margin: .25rem 0 .7rem; color: var(--text-muted); font-size: .83rem; }
+</style>

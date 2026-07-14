@@ -1,0 +1,63 @@
+---
+import archives from '../data/archives.json';
+import { withBase } from '../lib/paths';
+const points = [
+  { id:'vallaki', label:'Валлаки', x:25, y:43 },
+  { id:'vallaki-theater', label:'Театр', x:32, y:32 },
+  { id:'vallaki-orphanage', label:'Приют', x:34, y:53 },
+  { id:'ravenloft', label:'Замок Равенлофт', x:63, y:47 },
+  { id:'barovia-village', label:'Деревня Баровия', x:77, y:69 },
+].map((point) => ({ ...point, documents: archives.filter((item) => item.location === point.id) }));
+---
+<section class="archive-map" aria-labelledby="archive-map-title">
+  <div class="map-heading">
+    <div><small>Интерактивный указатель</small><h2 id="archive-map-title">Карта архивов Баровии</h2></div>
+    <p>Нажмите на точку, чтобы увидеть найденные в этом месте материалы.</p>
+  </div>
+  <div class="map-surface">
+    <span class="map-label label-vallaki">Валлаки</span>
+    <span class="map-label label-ravenloft">Равенлофт</span>
+    <span class="map-label label-barovia">Баровия</span>
+    <i class="road road-one"></i><i class="road road-two"></i>
+    {points.map((point) => (
+      <details id={point.id} class="map-point" style={`--x:${point.x}%;--y:${point.y}%`}>
+        <summary aria-label={`${point.label}: ${point.documents.length} материалов`}><b>✦</b><span>{point.label}</span><em>{point.documents.length}</em></summary>
+        <div class="map-panel">
+          <strong>{point.label}</strong>
+          <ul>{point.documents.map((document) => <li><a href={withBase(`/archives/${document.slug}`)}>{document.title}</a><small>{document.kind}</small></li>)}</ul>
+        </div>
+      </details>
+    ))}
+  </div>
+</section>
+
+<style>
+  .archive-map { margin-bottom:3rem; }
+  .map-heading { display:flex; justify-content:space-between; align-items:end; gap:2rem; margin-bottom:1rem; }
+  .map-heading small { color:var(--gold); text-transform:uppercase; letter-spacing:.12em; }
+  .map-heading h2 { margin:.2rem 0 0; color:var(--text-bright); font-family:var(--font-display); font-size:2.2rem; font-weight:400; }
+  .map-heading p { max-width:410px; margin:0; color:var(--text-muted); font-size:.82rem; }
+  .map-surface { position:relative; min-height:510px; border:1px solid var(--border); background:radial-gradient(ellipse at 20% 30%,rgba(182,154,99,.1),transparent 22%),radial-gradient(ellipse at 72% 64%,rgba(109,38,38,.14),transparent 25%),repeating-radial-gradient(ellipse at 46% 52%,transparent 0 38px,rgba(182,154,99,.055) 39px 40px),linear-gradient(135deg,#181612,#0d0d0c); isolation:isolate; }
+  .map-surface::before,.map-surface::after { content:''; position:absolute; inset:10% 7%; z-index:-1; border:1px solid rgba(182,154,99,.11); border-radius:48% 42% 55% 38%; transform:rotate(-7deg); }
+  .map-surface::after { inset:22% 14%; border-style:dashed; transform:rotate(9deg); }
+  .map-label { position:absolute; color:rgba(216,208,196,.12); font-family:var(--font-display); font-size:clamp(2rem,5vw,4.5rem); text-transform:uppercase; letter-spacing:.08em; }
+  .label-vallaki { left:7%; top:12%; }.label-ravenloft { right:8%; top:16%; }.label-barovia { right:8%; bottom:5%; }
+  .road { position:absolute; left:19%; top:48%; width:59%; height:1px; border-top:1px dashed rgba(182,154,99,.24); transform:rotate(12deg); transform-origin:left; }
+  .road-two { left:29%; top:36%; width:39%; transform:rotate(-4deg); }
+  .map-point { position:absolute; left:var(--x); top:var(--y); z-index:2; }
+  .map-point[open] { z-index:10; }
+  summary { display:grid; grid-template-columns:auto auto; justify-items:center; gap:.1rem .4rem; color:var(--text-main); cursor:pointer; list-style:none; transform:translate(-50%,-50%); }
+  summary::-webkit-details-marker { display:none; }
+  summary b { grid-row:1/3; display:grid; place-items:center; width:32px; height:32px; border:1px solid var(--gold); color:var(--red-light); background:#17130f; box-shadow:0 0 0 5px rgba(182,154,99,.08),0 5px 18px #000; transform:rotate(45deg); }
+  summary b::first-letter { transform:rotate(-45deg); }
+  summary span { white-space:nowrap; font-family:var(--font-display); font-size:1rem; text-shadow:0 2px 5px #000; }
+  summary em { color:var(--gold); font-size:.65rem; font-style:normal; }
+  .map-panel { position:absolute; left:0; top:26px; width:280px; max-height:300px; overflow:auto; padding:1rem; border:1px solid var(--border); background:rgba(20,18,15,.98); box-shadow:0 18px 40px rgba(0,0,0,.5); transform:translateX(-50%); }
+  .map-panel>strong { font-family:var(--font-display); font-size:1.3rem; font-weight:500; }
+  ul { display:grid; gap:.45rem; margin:.7rem 0 0; padding:0; list-style:none; }
+  li { display:grid; padding-top:.45rem; border-top:1px solid rgba(182,154,99,.14); }
+  li a { color:var(--text-main); text-decoration:none; font-size:.78rem; }.map-panel a:hover { color:var(--gold); }
+  li small { color:var(--text-muted); font-size:.62rem; }
+  @media(max-width:700px){
+    .map-heading{align-items:start;flex-direction:column;gap:.5rem}.map-surface{display:grid;gap:.65rem;min-height:0;padding:1rem}.map-label,.road,.map-surface::before,.map-surface::after{display:none}.map-point{position:relative;left:auto;top:auto}.map-point summary{grid-template-columns:auto 1fr auto;justify-items:start;transform:none;padding:.7rem;border:1px solid rgba(182,154,99,.2);background:#151310}.map-point summary b{grid-row:auto;width:25px;height:25px}.map-point summary em{align-self:center}.map-panel{position:relative;left:auto;top:auto;width:auto;max-height:none;transform:none;box-shadow:none}}
+</style>

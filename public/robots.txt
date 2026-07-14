@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://chacy5.github.io/Koel-Vorn/sitemap-index.xml

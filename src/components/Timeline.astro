@@ -1,0 +1,27 @@
+---
+import { withBase } from '../lib/paths';
+interface EventItem { title: string; slug: string; session: number; summary: string }
+interface Props { events: EventItem[] }
+const { events } = Astro.props;
+---
+<div class="timeline" aria-label="Хронология событий">
+  {events.map((event) => (
+    <article>
+      <span class="session">Серия {event.session}</span>
+      <h3><a href={withBase(`/chronicle#${event.slug}`)}>{event.title}</a></h3>
+      <p>{event.summary}</p>
+      <i aria-hidden="true"></i>
+    </article>
+  ))}
+</div>
+<style>
+  .timeline { display: grid; grid-template-columns: repeat(3, 1fr); gap: .8rem; position: relative; }
+  .timeline::after { content: ''; position: absolute; left: 8%; right: 8%; bottom: -1.3rem; height: 1px; background: var(--border); }
+  article { position: relative; min-height: 152px; padding: 1.1rem; border: 1px solid var(--border); background: var(--bg-card); }
+  article i { position: absolute; z-index: 1; left: 50%; bottom: -1.55rem; width: 8px; height: 8px; transform: rotate(45deg); border: 1px solid var(--gold-dark); background: var(--bg-main); }
+  .session { color: var(--gold); font-size: .7rem; text-transform: uppercase; letter-spacing: .09em; }
+  h3 { margin: .45rem 0; font-family: var(--font-display); font-size: 1.25rem; font-weight: 500; line-height: 1.05; }
+  h3 a { color: var(--text-bright); text-decoration: none; }
+  p { margin: 0; color: var(--text-muted); font-size: .8rem; line-height: 1.45; }
+  @media (max-width: 680px) { .timeline { grid-template-columns: 1fr; } .timeline::after, article i { display: none; } }
+</style>

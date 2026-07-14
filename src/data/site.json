@@ -1,0 +1,23 @@
+{
+  "name": "Коэл Ворн",
+  "eyebrow": "Личная хроника",
+  "description": "Хранитель врат. Эладрин. Пришёл из-за туманов. Ищет путь обратно.",
+  "heroQuote": "Туман скрывает дороги, но не цель. Я помню, зачем я здесь.",
+  "currentSession": 39,
+  "updatedYear": 2026,
+  "navigation": [
+    { "label": "Дневники", "href": "/diary" },
+    { "label": "Мировоззрение", "href": "/worldview" },
+    { "label": "Отношения", "href": "/relationships" },
+    { "label": "Персонажи", "href": "/characters" },
+    { "label": "Хроника", "href": "/chronicle" },
+    { "label": "Места", "href": "/places" },
+    { "label": "Архивы", "href": "/archives" },
+    { "label": "Библиотека", "href": "/library" }
+  ],
+  "thoughts": [
+    { "title": "О страхе", "text": "Страх — не слабость. Это напоминание, что ты ещё жив.", "href": "/worldview#fear-1" },
+    { "title": "О выборе", "text": "Иногда нет правильного выбора. Есть только тот, за который ты готов заплатить.", "href": "/worldview#freedom-of-choice" },
+    { "title": "О доме", "text": "Дом — не место. Это те, за кем ты вернёшься сквозь любой туман.", "href": "/library/backstory" }
+  ]
+}

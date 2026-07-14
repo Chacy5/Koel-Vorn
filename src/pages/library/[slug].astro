@@ -1,0 +1,10 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import TagList from '../../components/TagList.astro';
+import { withBase } from '../../lib/paths';
+export async function getStaticPaths(){return (await getCollection('library')).map((entry)=>({params:{slug:entry.data.slug},props:{entry}}))}
+const {entry}=Astro.props;const {Content}=await render(entry);
+---
+<ContentLayout title={entry.data.title} eyebrow={entry.data.kind} description={entry.data.summary}><div class="detail-grid"><article class="prose"><Content /></article><aside class="side-note"><h2>Материал</h2><TagList tags={entry.data.tags} />{entry.data.sourceFile&&<a class="download" href={withBase(entry.data.sourceFile)} download>Скачать исходный DOCX ↓</a>}</aside></div></ContentLayout>
+<style>.download{display:inline-block;margin-top:1.2rem;color:var(--gold);text-decoration:none}</style>

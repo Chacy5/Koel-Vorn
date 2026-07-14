@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import DiaryCard from '../../components/DiaryCard.astro';
+import FilterBar from '../../components/FilterBar.astro';
+const entries = (await getCollection('diary')).sort((a, b) => b.data.session - a.data.session);
+const options = (values: string[]) => [...new Set(values)].sort((a,b)=>a.localeCompare(b,'ru')).map((value)=>({value,label:value}));
+---
+<ContentLayout title="Дневники" description="Личные записи Коэла о событиях, людях и решениях, которые невозможно оставить в тумане.">
+  <FilterBar target="#diary-list" sessions={options(entries.map(({data})=>String(data.session)))} places={options(entries.flatMap(({data})=>data.places))} tags={options(entries.flatMap(({data})=>data.tags))} />
+  <div class="diary-list" id="diary-list">{entries.map(({ data }) => <div data-filter-item data-search={`${data.title} ${data.excerpt} ${data.tags.join(' ')}`} data-session={String(data.session)} data-place={data.places.join('|')} data-tag={data.tags.join('|')}><DiaryCard {...data} /></div>)}</div>
+</ContentLayout>
+<style>.diary-list { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }.diary-list>div[hidden]{display:none}.diary-list>div>:global(article){height:100%} @media(max-width:800px){.diary-list{grid-template-columns:1fr 1fr}} @media(max-width:540px){.diary-list{grid-template-columns:1fr}}</style>

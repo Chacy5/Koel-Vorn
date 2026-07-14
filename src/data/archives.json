@@ -1,0 +1,20 @@
+[
+  { "slug": "tome-of-strahd", "title": "Том Страда", "kind": "Книга", "file": "Том Страда.jpg", "location": "ravenloft", "locationLabel": "Замок Равенлофт", "summary": "Личный том хозяина Равенлофта." },
+  { "slug": "dinner-invitation", "title": "Приглашение на ужин", "kind": "Приглашение", "file": "Приглашение на ужин.png", "location": "ravenloft", "locationLabel": "Замок Равенлофт", "summary": "Приглашение прибыть на ужин в замок." },
+  { "slug": "library-letter", "title": "Письмо из библиотеки", "kind": "Письмо", "file": "Письмо из библиотеки.png", "location": "ravenloft", "locationLabel": "Замок Равенлофт", "summary": "Письмо, найденное среди библиотечных материалов." },
+  { "slug": "ismark-letter", "title": "Письмо от Исмарка", "kind": "Письмо", "file": "Письмо от Исмарка.png", "location": "barovia-village", "locationLabel": "Деревня Баровия", "summary": "Письмо Исмарка Коляновича." },
+  { "slug": "old-letter", "title": "Старое письмо", "kind": "Письмо", "file": "Старое письмо.png", "location": "barovia-village", "locationLabel": "Деревня Баровия", "summary": "Старое письмо, сохранившееся в Баровии." },
+  { "slug": "vallaki-note", "title": "Записка в Валлаки", "kind": "Записка", "file": "Записка в Валлаки.jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Записка, найденная в Валлаки." },
+  { "slug": "old-vallaki-note", "title": "Старая записка в Валлаки", "kind": "Записка", "file": "Старая записка в Валлаки.webp", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Старая городская записка." },
+  { "slug": "statist-note", "title": "Записка у Статиста", "kind": "Записка", "file": "Записка у Статиста.jpg", "location": "vallaki-theater", "locationLabel": "Театр Валлаки", "summary": "Записка, обнаруженная у Статиста." },
+  { "slug": "theater-invitation", "title": "Приглашение в театр", "kind": "Приглашение", "file": "Приглашение в театр!.png", "location": "vallaki-theater", "locationLabel": "Театр Валлаки", "summary": "Приглашение на театральное представление." },
+  { "slug": "orphanage-schedule", "title": "Расписание в приюте", "kind": "Расписание", "file": "Расписание в приюте.png", "location": "vallaki-orphanage", "locationLabel": "Приют Валлаки", "summary": "Распорядок, вывешенный в приюте." },
+  { "slug": "carefree-carrie", "title": "Беззаботная Кэрри и пирог с монеткой", "kind": "Книжка", "file": "Книжка _Беззаботная Кэрри и пирог с монеткой_.png", "location": "vallaki-orphanage", "locationLabel": "Приют Валлаки", "summary": "Иллюстрированная книжка, найденная в приюте." },
+  { "slug": "vallaki-laws", "title": "Законы Валлакии", "kind": "Законы", "file": "Законы Валлакии.jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Опубликованные правила и запреты города." },
+  { "slug": "baron-decree", "title": "Указ Барона Валлаки", "kind": "Указ", "file": "Указ Барона Валлаки.jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Официальный указ барона Валлаковича." },
+  { "slug": "vallaki-poster-1", "title": "Плакат в Валлаки I", "kind": "Плакат", "file": "Плакат в Валлаки (1).jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Первый из найденных городских плакатов." },
+  { "slug": "vallaki-poster-2", "title": "Плакат в Валлаки II", "kind": "Плакат", "file": "Плакат в Валлаки (2).jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Второй из найденных городских плакатов." },
+  { "slug": "vallaki-poster-3", "title": "Плакат в Валлаки III", "kind": "Плакат", "file": "Плакат в Валлаки (3).jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Третий из найденных городских плакатов." },
+  { "slug": "vallaki-poster-4", "title": "Плакат в Валлаки IV", "kind": "Плакат", "file": "Плакат в Валлаки (4).jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Четвёртый из найденных городских плакатов." },
+  { "slug": "vallaki-poster-5", "title": "Плакат в Валлаки V", "kind": "Плакат", "file": "Плакат в Валлаки (5).jpg", "location": "vallaki", "locationLabel": "Валлаки", "summary": "Пятый из найденных городских плакатов." }
+]

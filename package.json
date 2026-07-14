@@ -1,0 +1,22 @@
+{
+  "name": "koel-vorn-wiki",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro check && ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
+    "check": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "check:links": "node scripts/check-links.mjs",
+    "import:content": "node scripts/import-content.mjs && node scripts/import-current-relationships.mjs && node scripts/import-future-characters.mjs && node scripts/import-character-images.mjs",
+    "import:future-characters": "node scripts/import-future-characters.mjs",
+    "import:images": "node scripts/import-character-images.mjs"
+  },
+  "dependencies": {
+    "@astrojs/check": "latest",
+    "@astrojs/sitemap": "latest",
+    "astro": "latest",
+    "typescript": "latest"
+  }
+}

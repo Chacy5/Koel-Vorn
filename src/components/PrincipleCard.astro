@@ -1,0 +1,20 @@
+---
+import { withBase } from '../lib/paths';
+interface Props { title: string; slug: string; icon: string; summary: string }
+const { title, slug, icon, summary } = Astro.props;
+---
+<a class="principle-card reveal-card" href={withBase(`/worldview#${slug}`)}>
+  <span class="icon" aria-hidden="true">{icon}</span>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+  <i aria-hidden="true">Узнать больше →</i>
+</a>
+<style>
+  .principle-card { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 1.6rem; border: 1px solid var(--border); color: var(--text-main); text-align: center; text-decoration: none; background: linear-gradient(145deg, rgba(255,255,255,.018), transparent), var(--bg-card); transition: transform .25s, border-color .25s, background .25s; }
+  .principle-card:hover { transform: translateY(-4px); border-color: rgba(182,154,99,.58); background-color: var(--bg-card-hover); }
+  .icon { color: var(--gold-dark); font-family: var(--font-display); font-size: 2.15rem; }
+  h3 { max-width: 10rem; margin: .65rem 0 .45rem; color: var(--text-bright); font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; line-height: 1.05; }
+  p { margin: 0; color: var(--text-muted); line-height: 1.45; font-size: .84rem; }
+  i { margin-top: 1rem; color: var(--gold); font-style: normal; font-size: .72rem; opacity: 0; transform: translateY(4px); transition: .25s; }
+  .principle-card:hover i { opacity: 1; transform: none; }
+</style>

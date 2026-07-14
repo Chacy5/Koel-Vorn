@@ -1,0 +1,13 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import TagList from '../components/TagList.astro';
+const entries = (await getCollection('worldview')).sort((a,b) => a.data.order-b.data.order);
+const rendered = await Promise.all(entries.map(async (entry) => ({ entry, rendered: await render(entry) })));
+const categories=['Принципы','Страхи','Слабости','Привязанности'] as const;
+---
+<ContentLayout title="Мировоззрение" description="Принципы, которыми Коэл удерживает границу между необходимостью и превращением в то, с чем сражается.">
+  <nav class="category-nav" aria-label="Разделы мировоззрения">{categories.map((category)=><a href={`#${category.toLocaleLowerCase('ru')}`}>{category}</a>)}</nav>
+  {categories.map((category)=><section class="category" id={category.toLocaleLowerCase('ru')}><h2 class="category-title">{category}</h2><div class="principles">{rendered.filter(({entry})=>entry.data.category===category).map(({entry,rendered:{Content}}) => <article id={entry.data.slug} class="principle"><span>{entry.data.icon}</span><div><small>{category} · {entry.data.order}</small><h3>{entry.data.title}</h3><p>{entry.data.summary}</p><div class="prose"><Content /></div><TagList tags={entry.data.tags} /></div></article>)}</div></section>)}
+</ContentLayout>
+<style>.category-nav{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.5rem}.category-nav a{padding:.55rem .8rem;border:1px solid var(--border);color:var(--text-muted);text-decoration:none}.category-nav a:hover{color:var(--gold);border-color:var(--gold)}.category{scroll-margin-top:100px;margin-top:3.5rem}.category:first-of-type{margin-top:0}.category-title{margin:0 0 1rem;padding-bottom:.6rem;border-bottom:1px solid var(--border);font-family:var(--font-display);font-size:2.6rem;font-weight:400}.principles{display:grid;gap:1rem}.principle{scroll-margin-top:110px;display:grid;grid-template-columns:90px 1fr;gap:1.4rem;padding:1.8rem;border:1px solid var(--border);background:var(--bg-card)}.principle>span{color:var(--gold-dark);font-family:var(--font-display);font-size:3rem;text-align:center}.principle small{color:var(--gold);text-transform:uppercase;letter-spacing:.1em}.principle h3{margin:.2rem 0;font-family:var(--font-display);font-size:2rem;font-weight:500}.principle p{color:var(--text-muted)}@media(max-width:520px){.principle{grid-template-columns:1fr}.principle>span{text-align:left}}</style>

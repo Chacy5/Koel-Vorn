@@ -1,0 +1,15 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import archives from '../../data/archives.json';
+import { withBase } from '../../lib/paths';
+export function getStaticPaths(){return archives.map((item)=>({params:{slug:item.slug},props:{item}}))}
+const { item } = Astro.props;
+const image=withBase(`/images/archives/${item.file}`);
+---
+<ContentLayout title={item.title} eyebrow={`${item.kind} · ${item.locationLabel}`} description={item.summary}>
+  <article class="document-detail">
+    <a href={image} target="_blank" rel="noreferrer" title="Открыть изображение в полном размере"><img src={image} alt={item.title} width="1200" height="1600" /></a>
+    <aside><small>{item.kind}</small><h2>{item.locationLabel}</h2><p>{item.summary}</p><a href={withBase(`/places#${item.location}`)}>Показать на карте →</a><a href={image} target="_blank" rel="noreferrer">Открыть оригинал →</a></aside>
+  </article>
+</ContentLayout>
+<style>.document-detail{display:grid;grid-template-columns:minmax(0,2fr) minmax(250px,1fr);gap:2rem;align-items:start}.document-detail>a{display:grid;place-items:center;min-height:400px;padding:1rem;border:1px solid var(--border);background:#0c0c0b}.document-detail img{width:100%;max-height:78vh;object-fit:contain}.document-detail aside{display:grid;gap:.7rem;padding:1.3rem;border:1px solid var(--border);background:var(--bg-card)}aside small{color:var(--gold);text-transform:uppercase;letter-spacing:.1em}aside h2{margin:0;font-family:var(--font-display);font-weight:500}aside p{color:var(--text-muted)}aside a{color:var(--gold);text-decoration:none;font-size:.8rem}@media(max-width:760px){.document-detail{grid-template-columns:1fr}.document-detail>a{min-height:260px}}</style>

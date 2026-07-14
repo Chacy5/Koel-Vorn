@@ -1,0 +1,33 @@
+---
+import { getCollection, render } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import RelationMeter from '../../components/RelationMeter.astro';
+import { withBase } from '../../lib/paths';
+import RelationTimeline from '../../components/RelationTimeline.astro';
+import TagList from '../../components/TagList.astro';
+import CharacterImage from '../../components/CharacterImage.astro';
+import { resolveCharacterImage } from '../../lib/characterImages';
+export async function getStaticPaths() {
+  return (await getCollection('characters')).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const [allCharacters, diaries, events] = await Promise.all([getCollection('characters'), getCollection('diary'), getCollection('chronicle')]);
+const relatedCharacters = entry.data.relatedCharacters.map((slug:string)=>allCharacters.find((item)=>item.data.slug===slug)?.data).filter(Boolean);
+const relatedDiaries = diaries.filter((item)=>item.data.characters.includes(entry.data.slug)).sort((a,b)=>a.data.session-b.data.session);
+const relatedEvents = events.filter((item)=>item.data.characters.includes(entry.data.slug)).sort((a,b)=>a.data.session-b.data.session);
+const resolvedImage = resolveCharacterImage(entry.data);
+---
+<ContentLayout title={entry.data.name} eyebrow={`${entry.data.group} · ${entry.data.role}`} description={entry.data.relationLabel}>
+  <div class="detail-grid">
+    <article class="prose">
+      <CharacterImage class="portrait" name={entry.data.name} src={resolvedImage ? withBase(resolvedImage) : undefined} loading="eager" />
+      <Content />
+      <h2>Хронология отношений</h2><RelationTimeline points={entry.data.relationHistory} />
+      {relatedDiaries.length>0&&<><h2>Связанные дневники</h2><div class="related-list">{relatedDiaries.map((item)=><a href={withBase(`/diary/${item.data.slug}`)}><small>Серия {item.data.session}</small><strong>{item.data.title}</strong></a>)}</div></>}
+      {relatedEvents.length>0&&<><h2>Связанные события</h2><div class="related-list">{relatedEvents.map((item)=><a href={withBase(`/chronicle#${item.data.slug}`)}><small>Серия {item.data.session}</small><strong>{item.data.title}</strong></a>)}</div></>}
+    </article>
+    <aside class="side-note"><h2>Отношения</h2><RelationMeter positive={entry.data.currentRelation.positive} negative={entry.data.currentRelation.negative} /><p>{entry.data.relationLabel}</p><p class="meta">Статус: {entry.data.status}</p>{relatedCharacters.length>0&&<><h3>Связанные персонажи</h3><ul class="links">{relatedCharacters.map((item:any)=><li><a href={withBase(`/characters/${item.slug}`)}>{item.name}</a></li>)}</ul></>}<h3>Теги</h3><TagList tags={entry.data.tags} /></aside>
+  </div>
+</ContentLayout>
+<style>:global(.portrait){width:min(100%,560px);height:min(70vw,620px);margin-bottom:2rem}:global(.portrait img){filter:saturate(.72) brightness(.86)} h3{font-family:var(--font-display);font-weight:500}.links{padding-left:1rem}.links a{color:var(--text-main);text-decoration:none}.links a:hover{color:var(--gold)}.related-list{display:grid;gap:.55rem}.related-list a{display:grid;padding:.8rem 1rem;border:1px solid var(--border);color:var(--text-main);text-decoration:none}.related-list a:hover{border-color:var(--gold)}.related-list small{color:var(--gold)}.related-list strong{font-family:var(--font-display);font-size:1.15rem;font-weight:500}</style>

@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import RelationCard from '../../components/RelationCard.astro';
+import FilterBar from '../../components/FilterBar.astro';
+const characters = (await getCollection('characters')).map((entry) => entry.data).sort((a, b) => a.name.localeCompare(b.name, 'ru'));
+const options = (values: string[]) => [...new Set(values)].sort((a,b)=>a.localeCompare(b,'ru')).map((value)=>({value,label:value}));
+---
+<ContentLayout title="Персонажи" description="Люди и существа, чьи решения меняют путь Коэла через Баровию.">
+  <FilterBar target="#character-grid" groups={options(characters.map((item)=>item.group))} tags={options(characters.flatMap((item)=>item.tags))} />
+  <div class="character-grid" id="character-grid">{characters.map((character) => <div data-filter-item data-search={`${character.name} ${character.aliases.join(' ')} ${character.role} ${character.relationLabel} ${character.tags.join(' ')}`} data-group={character.group} data-tag={character.tags.join('|')}><RelationCard name={character.name} slug={character.slug} role={character.role} image={character.image} label={character.relationLabel} positive={character.currentRelation.positive} negative={character.currentRelation.negative} /></div>)}</div>
+</ContentLayout>
+<style>.character-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem}.character-grid>div[hidden]{display:none}.character-grid>div>:global(article){height:100%}@media(max-width:900px){.character-grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.character-grid{grid-template-columns:1fr 1fr}}@media(max-width:420px){.character-grid{grid-template-columns:1fr}}</style>
