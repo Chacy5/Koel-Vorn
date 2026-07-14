@@ -1,0 +1,17 @@
+---
+import ContentLayout from '../layouts/ContentLayout.astro';
+---
+<ContentLayout title="Админка" description="Редактирование хроники через защищённый вход GitHub.">
+  <article class="admin-card">
+    <small>Pages CMS</small>
+    <h2>Управление хроникой</h2>
+    <p>В админке можно создавать дневники и карточки персонажей, менять отношения и их хронологию, загружать изображения, редактировать места и настраивать рукописное оформление дневников.</p>
+    <a href="https://app.pagescms.org" target="_blank" rel="noreferrer">Открыть админку ↗</a>
+    <ol>
+      <li>Войдите через GitHub.</li>
+      <li>Разрешите Pages CMS доступ к репозиторию <strong>Chacy5/Koel-Vorn</strong>.</li>
+      <li>Выберите ветку <strong>main</strong>. Каждое сохранение автоматически обновит сайт.</li>
+    </ol>
+  </article>
+</ContentLayout>
+<style>.admin-card{max-width:720px;padding:clamp(1.4rem,4vw,2.5rem);border:1px solid var(--border);background:var(--bg-card)}small{color:var(--gold);text-transform:uppercase;letter-spacing:.12em}h2{margin:.3rem 0 1rem;font-family:var(--font-display);font-size:2rem;font-weight:500}p,li{color:var(--text-muted)}a{display:inline-block;margin:1rem 0;padding:.8rem 1rem;border:1px solid var(--gold-dark);color:var(--text-main);text-decoration:none;background:var(--red-dark)}a:hover{border-color:var(--gold)}ol{display:grid;gap:.6rem;padding-left:1.3rem}</style>

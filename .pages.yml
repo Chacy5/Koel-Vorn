@@ -1,0 +1,231 @@
+settings:
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "Добавить {name}: {filename}"
+      update: "Обновить {name}: {filename}"
+      delete: "Удалить {name}: {filename}"
+      rename: "Переименовать {name}: {oldFilename} → {newFilename}"
+
+media:
+  - name: images
+    label: Изображения сайта
+    input: public/images/uploads
+    output: /images/uploads
+    categories: [image]
+    extensions: [png, jpg, jpeg, webp]
+    rename: safe
+
+content:
+  - name: diary
+    label: Дневники
+    type: collection
+    path: src/content/diary
+    format: yaml-frontmatter
+    filename:
+      template: "{slug}.md"
+      field: create
+    view:
+      primary: title
+      fields: [session, date]
+      sort: session
+      order: desc
+    fields:
+      - { name: title, label: Заголовок, type: string, required: true }
+      - name: slug
+        label: Адрес записи
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+        description: Только латинские буквы, цифры и дефисы — например session-40.
+      - name: session
+        label: Номер серии
+        type: number
+        required: true
+        options: { min: 1 }
+      - { name: date, label: Дата, type: string, description: Можно оставить пустой. }
+      - { name: excerpt, label: Краткое описание, type: text, required: true }
+      - name: cover
+        label: Обложка
+        type: image
+        required: true
+        options: { media: images, path: diary }
+      - name: characters
+        label: Участники
+        type: reference
+        options:
+          collection: characters
+          multiple: true
+          search: "name,aliases,role"
+          value: "{fields.slug}"
+          label: "{fields.name}"
+      - name: places
+        label: Места
+        type: reference
+        options:
+          collection: places
+          multiple: true
+          search: "name,region"
+          value: "{fields.slug}"
+          label: "{fields.name}"
+      - { name: tags, label: Теги, type: string, list: true }
+      - { name: externalLinks, label: Внешние ссылки, type: string, list: true }
+      - name: body
+        label: Текст дневника
+        type: rich-text
+        required: true
+        options: { format: markdown, media: images, path: diary, switcher: true }
+
+  - name: characters
+    label: Персонажи и отношения
+    type: collection
+    path: src/content/characters
+    format: yaml-frontmatter
+    filename:
+      template: "{slug}.md"
+      field: create
+    view:
+      primary: name
+      fields: [role, group, status]
+      sort: name
+      order: asc
+    fields:
+      - { name: name, label: Имя, type: string, required: true }
+      - name: slug
+        label: Адрес карточки
+        type: string
+        required: true
+        pattern: "^[a-z0-9-]+$"
+        description: Только латинские буквы, цифры и дефисы.
+      - { name: role, label: Роль, type: string, required: true }
+      - { name: group, label: Группа или место, type: string, required: true }
+      - name: image
+        label: Портрет
+        type: image
+        options: { media: images, path: characters }
+        description: Загруженный здесь портрет имеет приоритет над автоматическим Roll20-портретом.
+      - { name: status, label: Статус, type: string }
+      - { name: aliases, label: Другие имена, type: string, list: true }
+      - { name: featured, label: Показывать на главной, type: boolean }
+      - name: currentRelation
+        label: Текущие отношения
+        type: object
+        required: true
+        fields:
+          - name: positive
+            label: Положительное
+            type: number
+            required: true
+            options: { min: 0, max: 10 }
+          - name: negative
+            label: Отрицательное
+            type: number
+            required: true
+            options: { min: -10, max: 0 }
+      - { name: relationLabel, label: Краткое отношение, type: text, required: true }
+      - { name: lastUpdatedSession, label: Обновлено в серии, type: number, options: { min: 1 } }
+      - { name: tags, label: Теги, type: string, list: true }
+      - name: relatedCharacters
+        label: Связанные персонажи
+        type: reference
+        options:
+          collection: characters
+          multiple: true
+          search: "name,aliases,role"
+          value: "{fields.slug}"
+          label: "{fields.name}"
+      - { name: relatedSessions, label: Связанные серии, type: number, list: true }
+      - name: relationHistory
+        label: Хронология отношений
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{label} · +{positive} / {negative}"
+        fields:
+          - { name: session, label: Серия, type: number, options: { min: 1 } }
+          - { name: label, label: Название этапа, type: string }
+          - { name: positive, label: Положительное, type: number, required: true, options: { min: 0, max: 10 } }
+          - { name: negative, label: Отрицательное, type: number, required: true, options: { min: -10, max: 0 } }
+          - { name: note, label: Заметка, type: text, required: true }
+      - name: body
+        label: Полная заметка о персонаже
+        type: rich-text
+        required: true
+        options: { format: markdown, media: false, switcher: true }
+
+  - name: places
+    label: Места
+    type: collection
+    path: src/content/places
+    format: yaml-frontmatter
+    filename:
+      template: "{slug}.md"
+      field: create
+    view:
+      primary: name
+      fields: [region]
+    fields:
+      - { name: name, label: Название, type: string, required: true }
+      - { name: slug, label: Адрес, type: string, required: true, pattern: "^[a-z0-9-]+$" }
+      - { name: region, label: Регион, type: string, required: true }
+      - { name: image, label: Изображение, type: image, options: { media: images, path: places } }
+      - { name: tags, label: Теги, type: string, list: true }
+      - { name: body, label: Описание, type: rich-text, options: { format: markdown, media: images, path: places } }
+
+  - name: appearance
+    label: Оформление дневника
+    type: file
+    path: src/data/theme.json
+    format: json
+    operations: { delete: false, rename: false }
+    fields:
+      - name: diaryFont
+        label: Почерк
+        type: select
+        required: true
+        options:
+          values:
+            - { name: neucha, label: Неровный мужской почерк }
+            - { name: bad-script, label: Перо и скоропись }
+            - { name: literata, label: Обычный печатный текст }
+      - { name: diaryFontSize, label: Размер почерка, type: number, required: true, options: { min: 18, max: 30 } }
+      - { name: diaryLineHeight, label: Межстрочный интервал, type: number, required: true, options: { min: 1.3, max: 2.2 } }
+      - { name: diaryParagraphGap, label: Отступ между абзацами, type: number, required: true, options: { min: 0.3, max: 2 } }
+      - { name: diaryPagePadding, label: Поля листа, type: number, required: true, options: { min: 20, max: 90 } }
+      - name: diaryPaper
+        label: Бумага
+        type: select
+        required: true
+        options:
+          values:
+            - { name: aged, label: Старая бумага }
+            - { name: pale, label: Светлый лист }
+            - { name: dark, label: Тёмный пергамент }
+      - name: diaryInk
+        label: Чернила
+        type: select
+        required: true
+        options:
+          values:
+            - { name: sepia, label: Сепия }
+            - { name: black, label: Чёрные }
+            - { name: faded, label: Выцветшие }
+
+  - name: archives
+    label: Архивные материалы
+    type: file
+    path: src/data/archives.json
+    format: json
+    list: true
+    operations: { delete: false, rename: false }
+    fields:
+      - { name: slug, label: Адрес, type: string, required: true }
+      - { name: title, label: Название, type: string, required: true }
+      - { name: kind, label: Тип, type: string, required: true }
+      - { name: file, label: Имя файла, type: string, required: true }
+      - { name: location, label: Код точки карты, type: string, required: true }
+      - { name: locationLabel, label: Место, type: string, required: true }
+      - { name: summary, label: Описание, type: text, required: true }
