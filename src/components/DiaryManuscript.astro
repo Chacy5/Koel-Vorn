@@ -1,0 +1,39 @@
+---
+import theme from '../data/theme.json';
+
+const manuscriptStyle = [
+  `--hand-size:${theme.diaryFontSize}px`,
+  `--hand-leading:${theme.diaryLineHeight}`,
+  `--paragraph-gap:${theme.diaryParagraphGap}em`,
+  `--page-padding:${theme.diaryPagePadding}px`,
+].join(';');
+---
+<section class:list={['diary-manuscript', `font-${theme.diaryFont}`, `paper-${theme.diaryPaper}`, `ink-${theme.diaryInk}`]} style={manuscriptStyle} aria-label="Рукописная запись Коэла">
+  <span class="binding-line" aria-hidden="true"></span>
+  <div class="manuscript-content"><slot /></div>
+</section>
+
+<style>
+  .diary-manuscript { position:relative; isolation:isolate; padding:var(--page-padding); color:var(--ink); background-color:var(--paper); background-image:linear-gradient(90deg,transparent 0 62px,rgba(111,44,38,.24) 63px 64px,transparent 65px),repeating-linear-gradient(0deg,transparent 0 calc(var(--hand-size) * var(--hand-leading) - 1px),var(--rule) calc(var(--hand-size) * var(--hand-leading))); box-shadow:0 22px 55px rgba(0,0,0,.38),inset 0 0 55px rgba(65,44,23,.18); transform:rotate(-.12deg); }
+  .diary-manuscript::before { content:''; position:absolute; inset:0; z-index:-1; opacity:.38; pointer-events:none; background:radial-gradient(circle at 12% 16%,rgba(90,55,20,.18),transparent 18%),radial-gradient(circle at 88% 72%,rgba(74,39,15,.13),transparent 24%),repeating-linear-gradient(113deg,rgba(255,255,255,.025) 0 1px,transparent 1px 5px); mix-blend-mode:multiply; }
+  .diary-manuscript::after { content:''; position:absolute; inset:8px; z-index:-1; border:1px solid rgba(75,51,27,.16); pointer-events:none; }
+  .paper-aged { --paper:#c6b591; --rule:rgba(70,76,72,.15); }
+  .paper-pale { --paper:#d8ccb2; --rule:rgba(64,77,75,.14); }
+  .paper-dark { --paper:#4a4034; --rule:rgba(211,198,166,.11); }
+  .ink-sepia { --ink:#30271f; }
+  .ink-black { --ink:#1b1a19; }
+  .ink-faded { --ink:#51483d; }
+  .paper-dark.ink-sepia,.paper-dark.ink-black,.paper-dark.ink-faded { --ink:#d4c8ae; }
+  .manuscript-content { position:relative; }
+  .font-neucha .manuscript-content { font-family:'Neucha','Segoe Print',cursive; }
+  .font-bad-script .manuscript-content { font-family:'Bad Script','Segoe Print',cursive; }
+  .font-literata .manuscript-content { font-family:var(--font-body); }
+  .manuscript-content { font-size:var(--hand-size); line-height:var(--hand-leading); letter-spacing:.012em; text-shadow:.018em .018em rgba(40,28,17,.16); }
+  .manuscript-content :global(p) { margin:0 0 var(--paragraph-gap); text-wrap:pretty; }
+  .manuscript-content :global(p:nth-of-type(3n+1)) { transform:rotate(.035deg); }
+  .manuscript-content :global(p:nth-of-type(3n+2)) { transform:rotate(-.025deg); }
+  .manuscript-content :global(h2),.manuscript-content :global(h3) { color:inherit; font-family:var(--font-display); }
+  .manuscript-content :global(blockquote) { margin:1.2em 0; padding:.2em 1.2em; border-left:2px solid rgba(92,48,35,.42); }
+  .binding-line { position:absolute; top:0; bottom:0; left:28px; width:9px; opacity:.26; background:radial-gradient(circle,rgba(51,37,24,.8) 0 2px,transparent 2.5px) center 18px/9px 48px repeat-y; }
+  @media(max-width:640px){.diary-manuscript{--page-padding:24px!important;padding-left:34px;background-image:linear-gradient(90deg,transparent 0 23px,rgba(111,44,38,.2) 24px 25px,transparent 26px),repeating-linear-gradient(0deg,transparent 0 calc(var(--hand-size) * var(--hand-leading) - 1px),var(--rule) calc(var(--hand-size) * var(--hand-leading)));transform:none}.binding-line{left:8px}}
+</style>

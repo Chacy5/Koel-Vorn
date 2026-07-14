@@ -3,6 +3,7 @@ import { getCollection, render } from 'astro:content';
 import ContentLayout from '../../layouts/ContentLayout.astro';
 import { withBase } from '../../lib/paths';
 import TagList from '../../components/TagList.astro';
+import DiaryManuscript from '../../components/DiaryManuscript.astro';
 export async function getStaticPaths() {
   return (await getCollection('diary')).map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
 }
@@ -19,9 +20,9 @@ const placeLinks = entry.data.places.map((slug:string)=>allPlaces.find((item)=>i
 ---
 <ContentLayout title={entry.data.title} eyebrow={`Дневник · Серия ${entry.data.session}`} description={entry.data.excerpt}>
   <div class="detail-grid">
-    <article class="prose"><img class="cover" src={withBase(entry.data.cover)} alt="" /><Content /></article>
+    <article class="prose diary-entry"><img class="cover" src={withBase(entry.data.cover)} alt="" /><DiaryManuscript><Content /></DiaryManuscript></article>
     <aside class="side-note"><h2>Запись</h2><p class="meta">Серия {entry.data.session}</p><h3>Участники</h3><ul class="links">{characterLinks.map((item:any)=><li><a href={withBase(`/characters/${item.slug}`)}>{item.name}</a></li>)}</ul><h3>Места</h3><ul class="links">{placeLinks.map((item:any)=><li><a href={withBase(`/places/${item.slug}`)}>{item.name}</a></li>)}</ul><h3>Теги</h3><TagList tags={entry.data.tags} />{entry.data.externalLinks.length>0&&<><h3>Материалы</h3>{entry.data.externalLinks.map((link:string)=><a class="external" href={link} target="_blank" rel="noreferrer">Внешняя ссылка ↗</a>)}</>}</aside>
   </div>
   <nav class="entry-nav" aria-label="Соседние записи">{previous?<a href={withBase(`/diary/${previous.slug}`)}>← <span><small>Предыдущая</small>{previous.title}</span></a>:<span></span>}{next&&<a class="next" href={withBase(`/diary/${next.slug}`)}><span><small>Следующая</small>{next.title}</span> →</a>}</nav>
 </ContentLayout>
-<style>.cover{width:100%;max-height:420px;object-fit:cover;margin-bottom:2rem;filter:saturate(.75) brightness(.82)} h3{font-family:var(--font-display);font-weight:500}.links{padding-left:1rem}.links a,.external{color:var(--text-main);text-decoration:none}.links a:hover,.external:hover{color:var(--gold)}.entry-nav{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}.entry-nav a{display:flex;gap:.8rem;color:var(--gold);text-decoration:none}.entry-nav a span{display:grid;color:var(--text-main)}.entry-nav small{color:var(--text-muted);font-size:.68rem;text-transform:uppercase}.entry-nav .next{text-align:right}</style>
+<style>.diary-entry{max-width:none}.cover{width:100%;max-height:420px;object-fit:cover;margin-bottom:2rem;filter:saturate(.75) brightness(.82)} h3{font-family:var(--font-display);font-weight:500}.links{padding-left:1rem}.links a,.external{color:var(--text-main);text-decoration:none}.links a:hover,.external:hover{color:var(--gold)}.entry-nav{display:flex;justify-content:space-between;gap:1rem;margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border)}.entry-nav a{display:flex;gap:.8rem;color:var(--gold);text-decoration:none}.entry-nav a span{display:grid;color:var(--text-main)}.entry-nav small{color:var(--text-muted);font-size:.68rem;text-transform:uppercase}.entry-nav .next{text-align:right}</style>
