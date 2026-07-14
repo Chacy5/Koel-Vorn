@@ -1,0 +1,20 @@
+---
+import site from '../data/site.json';
+import Sigil from './Sigil.astro';
+---
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand"><Sigil /><span><strong>{site.name}</strong><small>Хранитель врат. Эладрин.</small></span></div>
+    <p>Текущая серия: <b>{site.currentSession}</b> · Обновлено в {site.updatedYear}</p>
+  </div>
+</footer>
+<style>
+  footer { margin-top: 5rem; border-top: 1px solid var(--border); background: #0d0d0c; }
+  .footer-inner { width: min(100% - 3rem, 1440px); min-height: 130px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; gap: 2rem; }
+  .footer-brand { display: flex; align-items: center; gap: .75rem; }
+  .footer-brand span { display: grid; }
+  .footer-brand strong { color: var(--text-main); font-family: var(--font-display); font-size: 1.2rem; font-weight: 500; }
+  .footer-brand small, p { color: var(--text-muted); font-size: .76rem; }
+  p b { color: var(--gold); font-weight: 400; }
+  @media (max-width: 560px) { .footer-inner { width: min(100% - 1.5rem, 1440px); align-items: flex-start; flex-direction: column; padding: 2rem 0; } }
+</style>

@@ -1,0 +1,29 @@
+---
+interface Props { positive: number; negative: number; compact?: boolean }
+const { positive, negative, compact = false } = Astro.props;
+const positiveWidth = `${Math.min(Math.abs(positive) * 10, 100)}%`;
+const negativeWidth = `${Math.min(Math.abs(negative) * 10, 100)}%`;
+---
+<div class:list={["meters", { compact }]} title={`Положительное: +${positive}; отрицательное: ${negative}`} tabindex="0">
+  <div class="meter-row">
+    <span class="meter-label"><b>+</b>{positive}</span>
+    <span class="track"><i class="positive" style={`width:${positiveWidth}`}></i></span>
+  </div>
+  <div class="meter-row">
+    <span class="meter-label"><b>−</b>{Math.abs(negative)}</span>
+    <span class="track"><i class="negative" style={`width:${negativeWidth}`}></i></span>
+  </div>
+</div>
+<style>
+  .meters { display: grid; gap: .4rem; }
+  .meter-row { display: grid; grid-template-columns: 2.7rem 1fr; align-items: center; gap: .45rem; }
+  .meter-label { font-variant-numeric: tabular-nums; color: var(--text-muted); font-size: .75rem; }
+  .meter-label b { display: inline-block; width: .8rem; color: var(--gold); font-weight: 400; }
+  .meter-row:nth-child(2) b { color: #a95b57; }
+  .track { height: 3px; overflow: hidden; background: rgba(216,208,196,.12); }
+  .track i { display: block; height: 100%; min-width: 1px; }
+  .positive { background: linear-gradient(90deg, var(--gold-dark), #c6b58e); box-shadow: 0 0 8px rgba(182,154,99,.35); }
+  .negative { background: linear-gradient(90deg, var(--red-dark), #9e4d48); }
+  .compact { gap: .25rem; }
+  .compact .meter-row { grid-template-columns: 2.4rem 1fr; }
+</style>

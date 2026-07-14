@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import TagList from '../components/TagList.astro';
+import { withBase } from '../lib/paths';
+const entries=await getCollection('library');
+const sources=[
+  {title:'Дневник Коэла Ворна',type:'DOCX',href:'/documents/koel-vorn-diary.docx',text:'Оригинальный документ с полными текстами серий.'},
+  {title:'Пятая кровь — отношения',type:'XLSX',href:'/documents/koel-vorn-relationships.xlsx',text:'Исходная таблица числовых отношений и заметок.'},
+];
+---
+<ContentLayout title="Библиотека" description="Указатель полных текстов и исходных документов, на которых основана эта хроника."><div class="archive-grid">{entries.map(({data})=><article class="archive-card"><small>{data.kind}</small><h2><a href={withBase(`/library/${data.slug}`)}>{data.title}</a></h2><p>{data.summary}</p><TagList tags={data.tags} />{data.sourceFile&&<a class="download" href={withBase(data.sourceFile)} download>Скачать оригинал ↓</a>}</article>)}{sources.map((item)=><article class="archive-card"><small>{item.type}</small><h2>{item.title}</h2><p>{item.text}</p><a class="download" href={withBase(item.href)} download>Скачать файл ↓</a></article>)}</div></ContentLayout>
+<style>.download{display:inline-block;margin-top:1rem;color:var(--gold)!important;font-size:.78rem}</style>

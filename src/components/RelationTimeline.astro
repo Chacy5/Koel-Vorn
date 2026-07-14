@@ -1,0 +1,18 @@
+---
+interface Point { session?: number; label?: string; positive: number; negative: number; note: string }
+interface Props { points: Point[] }
+const { points } = Astro.props;
+---
+{points.length > 0 ? <ol class="relation-timeline">
+  {[...points].sort((a,b)=>(a.session??Number.MAX_SAFE_INTEGER)-(b.session??Number.MAX_SAFE_INTEGER)).map((point) => <li>
+    <div class="point"><span></span></div>
+    <div class="entry">
+      <small>{point.label ?? `Серия ${point.session}`}</small>
+      <h3><b>+{point.positive}</b><i>/</i><em>{point.negative}</em></h3>
+      <p>{point.note}</p>
+    </div>
+  </li>)}
+</ol> : <p class="empty-history">Изменения пока не зафиксированы.</p>}
+<style>
+  .relation-timeline{position:relative;margin:1.2rem 0;padding:0;list-style:none}.relation-timeline:before{content:'';position:absolute;top:.5rem;bottom:.5rem;left:11px;width:1px;background:var(--border)}li{display:grid;grid-template-columns:24px 1fr;gap:1rem;position:relative;padding-bottom:1.5rem}.point span{position:relative;z-index:1;display:block;width:12px;height:12px;margin:7px 0 0 5px;transform:rotate(45deg);border:1px solid var(--gold);background:var(--bg-card)}small{color:var(--gold);text-transform:uppercase;letter-spacing:.09em;font-size:.68rem}h3{display:flex;gap:.45rem;margin:.2rem 0;font-family:var(--font-display);font-size:1.45rem;font-weight:500}h3 b{color:#c7b484;font-weight:500}h3 em{color:#a95b57;font-style:normal}h3 i{color:var(--text-muted);font-style:normal}p{margin:.25rem 0 0;color:var(--text-muted);font-size:.85rem}.empty-history{color:var(--text-muted)}
+</style>

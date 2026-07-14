@@ -1,0 +1,32 @@
+---
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import ArchiveCard from '../../components/ArchiveCard.astro';
+import archives from '../../data/archives.json';
+const kinds = [...new Set(archives.map((item) => item.kind))].sort((a,b)=>a.localeCompare(b,'ru'));
+const locations = [...new Set(archives.map((item) => item.locationLabel))].sort((a,b)=>a.localeCompare(b,'ru'));
+---
+<ContentLayout title="Архивы" description="Письма, записки, объявления и другие материалы, найденные во время путешествия по Баровии.">
+  <div class="archive-controls" data-archive-controls>
+    <label><span>Поиск</span><input type="search" placeholder="Название документа…" data-archive-search /></label>
+    <label><span>Тип</span><select data-archive-kind><option value="">Все типы</option>{kinds.map((kind)=><option>{kind}</option>)}</select></label>
+    <label><span>Место</span><select data-archive-location><option value="">Все места</option>{locations.map((location)=><option>{location}</option>)}</select></label>
+    <p><b data-archive-count>{archives.length}</b> материалов</p>
+  </div>
+  <div class="archive-grid" data-archive-grid>
+    {archives.map((item)=><div data-document data-title={item.title.toLocaleLowerCase('ru')} data-kind={item.kind} data-location={item.locationLabel}><ArchiveCard {...item} /></div>)}
+  </div>
+</ContentLayout>
+<script>
+  const root=document.querySelector<HTMLElement>('[data-archive-controls]');
+  const cards=[...document.querySelectorAll<HTMLElement>('[data-document]')];
+  const search=root?.querySelector<HTMLInputElement>('[data-archive-search]');
+  const kind=root?.querySelector<HTMLSelectElement>('[data-archive-kind]');
+  const location=root?.querySelector<HTMLSelectElement>('[data-archive-location]');
+  const count=root?.querySelector<HTMLElement>('[data-archive-count]');
+  const apply=()=>{let visible=0;cards.forEach((card)=>{const show=(!search?.value||card.dataset.title?.includes(search.value.trim().toLocaleLowerCase('ru')))&&(!kind?.value||card.dataset.kind===kind.value)&&(!location?.value||card.dataset.location===location.value);card.hidden=!show;if(show)visible+=1});if(count)count.textContent=String(visible)};
+  search?.addEventListener('input',apply);kind?.addEventListener('change',apply);location?.addEventListener('change',apply);
+</script>
+<style>
+  .archive-controls{display:grid;grid-template-columns:2fr 1fr 1fr;gap:.7rem;align-items:end;margin-bottom:1.4rem;padding:1rem;border:1px solid var(--border);background:var(--bg-soft)}
+  label{display:grid;gap:.3rem}label span{color:var(--gold);font-size:.66rem;text-transform:uppercase;letter-spacing:.09em}input,select{width:100%;min-height:42px;padding:.55rem .7rem;border:1px solid var(--border);color:var(--text-main);background:#12110f;font:inherit;font-size:.8rem}.archive-controls p{grid-column:1/-1;margin:0;color:var(--text-muted);font-size:.72rem}.archive-grid>div[hidden]{display:none}.archive-grid>div>:global(article){height:100%}@media(max-width:760px){.archive-controls{grid-template-columns:1fr 1fr}.archive-controls label:first-child{grid-column:1/-1}}@media(max-width:480px){.archive-controls{grid-template-columns:1fr}.archive-controls label:first-child{grid-column:auto}}
+</style>

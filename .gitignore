@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+roll20_downloader_package/
+public/images/characters/albedo.png
+public/images/characters/esher.png
+public/images/characters/niko.png
+public/images/characters/tana.png

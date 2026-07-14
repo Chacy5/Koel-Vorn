@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../../layouts/ContentLayout.astro';
+import { withBase } from '../../lib/paths';
+import { normalizeTag } from '../../lib/tags';
+
+export async function getStaticPaths(){
+  const [characters,diaries,events,places,library,worldview]=await Promise.all([getCollection('characters'),getCollection('diary'),getCollection('chronicle'),getCollection('places'),getCollection('library'),getCollection('worldview')]);
+  const tags=[...new Set([...characters.flatMap((item)=>item.data.tags),...diaries.flatMap((item)=>item.data.tags),...events.flatMap((item)=>item.data.tags),...places.flatMap((item)=>item.data.tags),...library.flatMap((item)=>item.data.tags),...worldview.flatMap((item)=>item.data.tags)].map(normalizeTag))];
+  return tags.map((tag)=>({params:{tag},props:{tag}}));
+}
+const {tag}=Astro.props;
+const [characters,diaries,events,places,library,worldview]=await Promise.all([getCollection('characters'),getCollection('diary'),getCollection('chronicle'),getCollection('places'),getCollection('library'),getCollection('worldview')]);
+const items=[
+  ...characters.filter((item)=>item.data.tags.map(normalizeTag).includes(tag)).map((item)=>({type:'Персонаж',title:item.data.name,text:`${item.data.role} · ${item.data.relationLabel}`,href:`/characters/${item.data.slug}`})),
+  ...diaries.filter((item)=>item.data.tags.map(normalizeTag).includes(tag)).map((item)=>({type:'Дневник',title:item.data.title,text:item.data.excerpt,href:`/diary/${item.data.slug}`})),
+  ...events.filter((item)=>item.data.tags.map(normalizeTag).includes(tag)).map((item)=>({type:'Событие',title:item.data.title,text:item.data.summary,href:`/chronicle#${item.data.slug}`})),
+  ...places.filter((item)=>item.data.tags.map(normalizeTag).includes(tag)).map((item)=>({type:'Место',title:item.data.name,text:item.data.region,href:`/places/${item.data.slug}`})),
+  ...library.filter((item)=>item.data.tags.map(normalizeTag).includes(tag)).map((item)=>({type:'Библиотека',title:item.data.title,text:item.data.summary,href:`/library/${item.data.slug}`})),
+  ...worldview.filter((item)=>item.data.tags.map(normalizeTag).includes(tag)).map((item)=>({type:'Мировоззрение',title:item.data.title,text:item.data.summary,href:`/worldview#${item.data.slug}`})),
+];
+---
+<ContentLayout title={`#${tag}`} eyebrow="Тематический указатель" description={`Все материалы, связанные с темой «${tag}». Найдено: ${items.length}.`}><div class="archive-grid">{items.map((item)=><article class="archive-card"><small>{item.type}</small><h2><a href={withBase(item.href)}>{item.title}</a></h2><p>{item.text}</p></article>)}</div></ContentLayout>

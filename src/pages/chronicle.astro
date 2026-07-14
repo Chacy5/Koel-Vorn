@@ -1,0 +1,14 @@
+---
+import { getCollection } from 'astro:content';
+import ContentLayout from '../layouts/ContentLayout.astro';
+import FilterBar from '../components/FilterBar.astro';
+import TagList from '../components/TagList.astro';
+import { withBase } from '../lib/paths';
+const events = (await getCollection('chronicle')).sort((a,b) => a.data.session-b.data.session).map((entry)=>entry.data);
+const options=(values:string[])=>[...new Set(values)].sort().map((value)=>({value,label:value}));
+---
+<ContentLayout title="Хроника" description="Последовательность событий, после которых прежние решения уже невозможно вернуть.">
+  <FilterBar target="#chronicle" sessions={options(events.map((event)=>String(event.session)))} tags={options(events.flatMap((event)=>event.tags))} />
+  <div class="chronicle" id="chronicle">{events.map((event)=><article id={event.slug} data-filter-item data-search={`${event.title} ${event.summary} ${event.tags.join(' ')}`} data-session={String(event.session)} data-tag={event.tags.join('|')}><div class="marker"><span>{event.session}</span></div><div><small>Серия {event.session}</small><h2>{event.title}</h2><p>{event.summary}</p>{event.consequences.length>0&&<ul>{event.consequences.map((item)=><li>{item}</li>)}</ul>}<TagList tags={event.tags} />{event.diary&&<a class="diary-link" href={withBase(`/diary/${event.diary}`)}>Читать запись →</a>}</div></article>)}</div>
+</ContentLayout>
+<style>.chronicle{position:relative;display:grid;gap:1rem}.chronicle:before{content:'';position:absolute;left:32px;top:0;bottom:0;width:1px;background:var(--border)}article[hidden]{display:none}article{position:relative;display:grid;grid-template-columns:65px 1fr;gap:1.4rem;padding:1.4rem 1.4rem 1.4rem 0;border:1px solid var(--border);background:var(--bg-card);scroll-margin-top:110px}.marker{display:grid;place-items:center}.marker span{z-index:1;display:grid;place-items:center;width:42px;height:42px;transform:rotate(45deg);border:1px solid var(--gold-dark);background:var(--bg-main);color:var(--gold);font-size:.72rem}small{color:var(--gold)}h2{margin:.2rem 0;font-family:var(--font-display);font-size:1.8rem;font-weight:500}p,li{color:var(--text-muted)}.diary-link{display:inline-block;margin-top:.8rem;color:var(--gold);text-decoration:none}</style>

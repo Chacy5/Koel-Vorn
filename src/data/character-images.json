@@ -1,0 +1,583 @@
+[
+  {
+    "id": "adrian-martikov",
+    "name": "Адриан Мартиков",
+    "image": "/images/characters/roll20/Адриан Мартиков.png",
+    "sourceName": "Адриан Мартиков",
+    "file": "Адриан Мартиков.png"
+  },
+  {
+    "id": "ayzek-strazhni",
+    "name": "Айзек Стражни",
+    "image": "/images/characters/roll20/Айзек Стражни.png",
+    "sourceName": "Айзек Стражни",
+    "file": "Айзек Стражни.png"
+  },
+  {
+    "id": "akter",
+    "name": "Актёр",
+    "image": "/images/characters/roll20/Актёр.jpg",
+    "sourceName": "Актёр",
+    "file": "Актёр.jpg"
+  },
+  {
+    "id": "aleksey",
+    "name": "Алексей",
+    "image": "/images/characters/roll20/Алексей.jpg",
+    "sourceName": "Алексей",
+    "file": "Алексей.jpg"
+  },
+  {
+    "id": "anastrazya",
+    "name": "Анастразья",
+    "image": "/images/characters/roll20/Анастразья.png",
+    "sourceName": "Анастразья",
+    "file": "Анастразья.png"
+  },
+  {
+    "id": "arik-lorensk",
+    "name": "Арик Лоренск",
+    "image": "/images/characters/roll20/Арик Лоренск.png",
+    "sourceName": "Арик Лоренск",
+    "file": "Арик Лоренск.png"
+  },
+  {
+    "id": "arrabel",
+    "name": "Аррабель",
+    "image": "/images/characters/roll20/Араббель.png",
+    "sourceName": "Араббель",
+    "file": "Араббель.png"
+  },
+  {
+    "id": "arrigal",
+    "name": "Арригал",
+    "image": "/images/characters/roll20/Арригал.png",
+    "sourceName": "Арригал",
+    "file": "Арригал.png"
+  },
+  {
+    "id": "barov-fon-zarovich",
+    "name": "Баров фон Зарович",
+    "image": "/images/characters/roll20/Баров Фон Зарович.png",
+    "sourceName": "Баров Фон Зарович",
+    "file": "Баров Фон Зарович.png"
+  },
+  {
+    "id": "berserk",
+    "name": "Берсерк",
+    "image": "/images/characters/roll20/Берсерк.png",
+    "sourceName": "Берсерк",
+    "file": "Берсерк.png"
+  },
+  {
+    "id": "bildrat-kantemir",
+    "name": "Бильдрат Кантемир",
+    "image": "/images/characters/roll20/Бильдрат Кантемир.png",
+    "sourceName": "Бильдрат Кантемир",
+    "file": "Бильдрат Кантемир.png"
+  },
+  {
+    "id": "bluto-krograrov",
+    "name": "Блуто Крограров",
+    "image": "/images/characters/roll20/Блуто Крограров [МЕРТВ].png",
+    "sourceName": "Блуто Крограров [МЕРТВ]",
+    "file": "Блуто Крограров [МЕРТВ].png"
+  },
+  {
+    "id": "brom-martikov",
+    "name": "Бром Мартиков",
+    "image": "/images/characters/roll20/Бром Мартиков.png",
+    "sourceName": "Бром Мартиков",
+    "file": "Бром Мартиков.png"
+  },
+  {
+    "id": "brey-martikov",
+    "name": "Брэй Мартиков",
+    "image": "/images/characters/roll20/Брэй Мартиков.png",
+    "sourceName": "Брэй Мартиков",
+    "file": "Брэй Мартиков.png"
+  },
+  {
+    "id": "valenta",
+    "name": "Валента",
+    "image": "/images/characters/roll20/Валента.png",
+    "sourceName": "Валента",
+    "file": "Валента.png"
+  },
+  {
+    "id": "valrim-i-serella-fon-karshtayn",
+    "name": "Валрим и Серелла фон Карштайн",
+    "image": "/images/characters/roll20/Валрим и Серелла фон Карштайн.webp",
+    "sourceName": "Валрим и Серелла фон Карштайн",
+    "file": "Валрим и Серелла фон Карштайн.webp"
+  },
+  {
+    "id": "vargas",
+    "name": "Варгас Валлакович",
+    "image": "/images/characters/roll20/Варгас Валлакович.png",
+    "sourceName": "Варгас Валлакович",
+    "file": "Варгас Валлакович.png"
+  },
+  {
+    "id": "vasiliy-fon-holts",
+    "name": "Василий фон Хольц",
+    "image": "/images/characters/roll20/Василий фон Хольц.png",
+    "sourceName": "Василий фон Хольц",
+    "file": "Василий фон Хольц.png"
+  },
+  {
+    "id": "veliar",
+    "name": "Велиар",
+    "image": "/images/characters/roll20/Велиар.png",
+    "sourceName": "Велиар",
+    "file": "Велиар.png"
+  },
+  {
+    "id": "vesya",
+    "name": "Веся",
+    "image": "/images/characters/roll20/Веся.png",
+    "sourceName": "Веся",
+    "file": "Веся.png"
+  },
+  {
+    "id": "viktor-vallakovich",
+    "name": "Виктор Валлакович",
+    "image": "/images/characters/roll20/Виктор Валлакович.jpg",
+    "sourceName": "Виктор Валлакович",
+    "file": "Виктор Валлакович.jpg"
+  },
+  {
+    "id": "gadof-blinskiy",
+    "name": "Гадоф Блинский",
+    "image": "/images/characters/roll20/Гадоф _GodOff_ Блинский.jpg",
+    "sourceName": "Гадоф \"GodOff\" Блинский",
+    "file": "Гадоф _GodOff_ Блинский.jpg"
+  },
+  {
+    "id": "gertruda",
+    "name": "Гертруда",
+    "image": "/images/characters/roll20/Гертруда.png",
+    "sourceName": "Гертруда",
+    "file": "Гертруда.png"
+  },
+  {
+    "id": "gromm",
+    "name": "Громм",
+    "image": "/images/characters/roll20/Громм.png",
+    "sourceName": "Громм",
+    "file": "Громм.png"
+  },
+  {
+    "id": "dag-tomesku",
+    "name": "Даг Томеску",
+    "image": "/images/characters/roll20/Даг Томеску.png",
+    "sourceName": "Даг Томеску",
+    "file": "Даг Томеску.png"
+  },
+  {
+    "id": "danika-dorakova",
+    "name": "Даника Доракова",
+    "image": "/images/characters/roll20/Даника Доракова.png",
+    "sourceName": "Даника Доракова",
+    "file": "Даника Доракова.png"
+  },
+  {
+    "id": "doru",
+    "name": "Дору",
+    "image": "/images/characters/roll20/Дору (порождение) [МЕРТВ].jpg",
+    "sourceName": "Дору (порождение) [МЕРТВ]",
+    "file": "Дору (порождение) [МЕРТВ].jpg"
+  },
+  {
+    "id": "devian-martikov",
+    "name": "Дэвиан Мартиков",
+    "image": "/images/characters/roll20/Дэвиан Мартиков.png",
+    "sourceName": "Дэвиан Мартиков",
+    "file": "Дэвиан Мартиков.png"
+  },
+  {
+    "id": "evgeniy-krushkin",
+    "name": "Евгений Крушкин",
+    "image": "/images/characters/roll20/Евгений Крушкин.png",
+    "sourceName": "Евгений Крушкин",
+    "file": "Евгений Крушкин.png"
+  },
+  {
+    "id": "zantras-tsaretvorets",
+    "name": "Зантрас Царетворец",
+    "image": "/images/characters/roll20/Зантрас Царетворец.png",
+    "sourceName": "Зантрас Царетворец",
+    "file": "Зантрас Царетворец.png"
+  },
+  {
+    "id": "zuleyka",
+    "name": "Зулейка",
+    "image": "/images/characters/roll20/Зулейка Торанеску.png",
+    "sourceName": "Зулейка Торанеску",
+    "file": "Зулейка Торанеску.png"
+  },
+  {
+    "id": "iva",
+    "name": "Ива",
+    "image": "/images/characters/roll20/Ива.jpg",
+    "sourceName": "Ива",
+    "file": "Ива.jpg"
+  },
+  {
+    "id": "irina",
+    "name": "Ирина",
+    "image": "/images/characters/roll20/Ирина Коляна.webp",
+    "sourceName": "Ирина Коляна",
+    "file": "Ирина Коляна.webp"
+  },
+  {
+    "id": "ismark",
+    "name": "Исмарк",
+    "image": "/images/characters/roll20/Исмарк Колянович.png",
+    "sourceName": "Исмарк Колянович",
+    "file": "Исмарк Колянович.png"
+  },
+  {
+    "id": "yeska",
+    "name": "Йеска",
+    "image": "/images/characters/roll20/Йеска.png",
+    "sourceName": "Йеска",
+    "file": "Йеска.png"
+  },
+  {
+    "id": "kazimir-velikov",
+    "name": "Казимир Великов",
+    "image": "/images/characters/roll20/Казимир Великов.png",
+    "sourceName": "Казимир Великов",
+    "file": "Казимир Великов.png"
+  },
+  {
+    "id": "karl-i-nikolay-vahter",
+    "name": "Карл и Николай Вахтер",
+    "image": "/images/characters/roll20/Карл и Николай Вахтер.jpg",
+    "sourceName": "Карл и Николай Вахтер",
+    "file": "Карл и Николай Вахтер.jpg"
+  },
+  {
+    "id": "klementina",
+    "name": "Клементина",
+    "image": "/images/characters/roll20/Клементина.png",
+    "sourceName": "Клементина",
+    "file": "Клементина.png"
+  },
+  {
+    "id": "kolyan-indirovich",
+    "name": "Колян Индирович",
+    "image": "/images/characters/roll20/Колян Индирович [МЕРТВ].png",
+    "sourceName": "Колян Индирович [МЕРТВ]",
+    "file": "Колян Индирович [МЕРТВ].png"
+  },
+  {
+    "id": "korund",
+    "name": "Корунд",
+    "image": "/images/characters/roll20/Корунд.png",
+    "sourceName": "Корунд",
+    "file": "Корунд.png"
+  },
+  {
+    "id": "lanselot",
+    "name": "Ланселот",
+    "image": "/images/characters/roll20/Ланселот.jpg",
+    "sourceName": "Ланселот",
+    "file": "Ланселот.jpg"
+  },
+  {
+    "id": "ledi-fiona-vahter",
+    "name": "Леди Фиона Вахтер",
+    "image": "/images/characters/roll20/Леди Фиона Вахтер.png",
+    "sourceName": "Леди Фиона Вахтер",
+    "file": "Леди Фиона Вахтер.png"
+  },
+  {
+    "id": "lidiya-petrovna",
+    "name": "Лидия Петровна",
+    "image": "/images/characters/roll20/Лидия Петровна.png",
+    "sourceName": "Лидия Петровна",
+    "file": "Лидия Петровна.png"
+  },
+  {
+    "id": "luvash",
+    "name": "Луваш",
+    "image": "/images/characters/roll20/Луваш.png",
+    "sourceName": "Луваш",
+    "file": "Луваш.png"
+  },
+  {
+    "id": "madam-eva",
+    "name": "Мадам Ева",
+    "image": "/images/characters/roll20/Мадам Ева.webp",
+    "sourceName": "Мадам Ева",
+    "file": "Мадам Ева.webp"
+  },
+  {
+    "id": "margaret",
+    "name": "Маргарет",
+    "image": "/images/characters/roll20/Маргарет.png",
+    "sourceName": "Маргарет",
+    "file": "Маргарет.png"
+  },
+  {
+    "id": "marishka",
+    "name": "Маришка",
+    "image": "/images/characters/roll20/Маришка.png",
+    "sourceName": "Маришка",
+    "file": "Маришка.png"
+  },
+  {
+    "id": "mark-bessmertnik",
+    "name": "Марк Бессмертник",
+    "image": "/images/characters/roll20/Марк Бессмертник.webp",
+    "sourceName": "Марк Бессмертник",
+    "file": "Марк Бессмертник.webp"
+  },
+  {
+    "id": "milivoy",
+    "name": "Миливой",
+    "image": "/images/characters/roll20/Миливой.jpg",
+    "sourceName": "Миливой",
+    "file": "Миливой.jpg"
+  },
+  {
+    "id": "mogilschik",
+    "name": "Могильщик",
+    "image": "/images/characters/roll20/Могильщик [МЕРТВ].jpg",
+    "sourceName": "Могильщик [МЕРТВ]",
+    "file": "Могильщик [МЕРТВ].jpg"
+  },
+  {
+    "id": "meri",
+    "name": "Мэри",
+    "image": "/images/characters/roll20/Мэри.png",
+    "sourceName": "Мэри",
+    "file": "Мэри.png"
+  },
+  {
+    "id": "narod-vistan",
+    "name": "Народ вистан",
+    "image": "/images/characters/roll20/Народ вистан.jpg",
+    "sourceName": "Народ вистан",
+    "file": "Народ вистан.jpg"
+  },
+  {
+    "id": "notkin",
+    "name": "Ноткин",
+    "image": "/images/characters/roll20/Ноткин.jpg",
+    "sourceName": "Ноткин",
+    "file": "Ноткин.jpg"
+  },
+  {
+    "id": "otets-donovich",
+    "name": "Отец Донович",
+    "image": "/images/characters/roll20/Отец Донавич [МЕРТВ].png",
+    "sourceName": "Отец Донавич [МЕРТВ]",
+    "file": "Отец Донавич [МЕРТВ].png"
+  },
+  {
+    "id": "otets-lukyan-petrovich",
+    "name": "Отец Лукъян Петрович",
+    "image": "/images/characters/roll20/Отец Лукъян Петрович.png",
+    "sourceName": "Отец Лукъян Петрович",
+    "file": "Отец Лукъян Петрович.png"
+  },
+  {
+    "id": "parrivympel",
+    "name": "Парривымпел",
+    "image": "/images/characters/roll20/Парривымпел.png",
+    "sourceName": "Парривымпел",
+    "file": "Парривымпел.png"
+  },
+  {
+    "id": "petra",
+    "name": "Петра",
+    "image": "/images/characters/roll20/Петра.jpg",
+    "sourceName": "Петра",
+    "file": "Петра.jpg"
+  },
+  {
+    "id": "pikkolo",
+    "name": "Пикколо",
+    "image": "/images/characters/roll20/Пикколо.png",
+    "sourceName": "Пикколо",
+    "file": "Пикколо.png"
+  },
+  {
+    "id": "rahadin",
+    "name": "Рахадин",
+    "image": "/images/characters/roll20/Рахадин.webp",
+    "sourceName": "Рахадин",
+    "file": "Рахадин.webp"
+  },
+  {
+    "id": "riktavio",
+    "name": "Риктавио",
+    "image": "/images/characters/roll20/Риктавио.png",
+    "sourceName": "Риктавио",
+    "file": "Риктавио.png"
+  },
+  {
+    "id": "rosemary",
+    "name": "Розмари",
+    "image": "/images/characters/roll20/Розмари.png",
+    "sourceName": "Розмари",
+    "file": "Розмари.png"
+  },
+  {
+    "id": "sayrus-belvyu",
+    "name": "Сайрус Белвью",
+    "image": "/images/characters/roll20/Сайрус Белвью.jpg",
+    "sourceName": "Сайрус Белвью",
+    "file": "Сайрус Белвью.jpg"
+  },
+  {
+    "id": "sangzor",
+    "name": "Сангзор",
+    "image": "/images/characters/roll20/Сангзор.png",
+    "sourceName": "Сангзор",
+    "file": "Сангзор.png"
+  },
+  {
+    "id": "sikeyn-pozhiratel-dush",
+    "name": "Сикейн, Пожиратель Душ",
+    "image": "/images/characters/roll20/Сикейн, Пожиратель Душ.png",
+    "sourceName": "Сикейн, Пожиратель Душ",
+    "file": "Сикейн, Пожиратель Душ.png"
+  },
+  {
+    "id": "solomiya",
+    "name": "Соломия",
+    "image": "/images/characters/roll20/Соломия.jpg",
+    "sourceName": "Соломия",
+    "file": "Соломия.jpg"
+  },
+  {
+    "id": "statist",
+    "name": "Статист",
+    "image": "/images/characters/roll20/Статист.jpg",
+    "sourceName": "Статист",
+    "file": "Статист.jpg"
+  },
+  {
+    "id": "stefaniya-martikova",
+    "name": "Стефания Мартикова",
+    "image": "/images/characters/roll20/Стефания Мартикова.png",
+    "sourceName": "Стефания Мартикова",
+    "file": "Стефания Мартикова.png"
+  },
+  {
+    "id": "strad-fon-zarovich",
+    "name": "Страд фон Зарович",
+    "image": "/images/characters/roll20/Страд Фон Зарович.png",
+    "sourceName": "Страд Фон Зарович",
+    "file": "Страд Фон Зарович.png"
+  },
+  {
+    "id": "tvorets",
+    "name": "Творец",
+    "image": "/images/characters/roll20/Творец.png",
+    "sourceName": "Творец",
+    "file": "Творец.png"
+  },
+  {
+    "id": "tetushka-morganta",
+    "name": "Тётушка Морганта",
+    "image": "/images/characters/roll20/Тётушка Морганта.png",
+    "sourceName": "Тётушка Морганта",
+    "file": "Тётушка Морганта.png"
+  },
+  {
+    "id": "tryapichnik",
+    "name": "Тряпичник",
+    "image": "/images/characters/roll20/Тряпичник.png",
+    "sourceName": "Тряпичник",
+    "file": "Тряпичник.png"
+  },
+  {
+    "id": "uolter-fon-karshtayn",
+    "name": "Уолтер фон Карштайн",
+    "image": "/images/characters/roll20/Уолтер фон Карштайн.png",
+    "sourceName": "Уолтер фон Карштайн",
+    "file": "Уолтер фон Карштайн.png"
+  },
+  {
+    "id": "urvin-martikov",
+    "name": "Урвин Мартиков",
+    "image": "/images/characters/roll20/Урвин Мартиков.png",
+    "sourceName": "Урвин Мартиков",
+    "file": "Урвин Мартиков.png"
+  },
+  {
+    "id": "utopshiy",
+    "name": "Утопший",
+    "image": "/images/characters/roll20/Утопший.png",
+    "sourceName": "Утопший",
+    "file": "Утопший.png"
+  },
+  {
+    "id": "feliks",
+    "name": "Феликс",
+    "image": "/images/characters/roll20/Феликс.jpg",
+    "sourceName": "Феликс",
+    "file": "Феликс.jpg"
+  },
+  {
+    "id": "hvor",
+    "name": "Хворь",
+    "image": "/images/characters/roll20/Хворь.png",
+    "sourceName": "Хворь",
+    "file": "Хворь.png"
+  },
+  {
+    "id": "henrik-van-der-vurt",
+    "name": "Хенрик ван дер Вурт",
+    "image": "/images/characters/roll20/Хенрик ван дер Вурт.jpg",
+    "sourceName": "Хенрик ван дер Вурт",
+    "file": "Хенрик ван дер Вурт.jpg"
+  },
+  {
+    "id": "chereshnya",
+    "name": "Черешня",
+    "image": "/images/characters/roll20/Черешня.png",
+    "sourceName": "Черешня",
+    "file": "Черешня.png"
+  },
+  {
+    "id": "sholdar",
+    "name": "Шольдар",
+    "image": "/images/characters/roll20/Шольдар Шольдарович.png",
+    "sourceName": "Шольдар Шольдарович",
+    "file": "Шольдар Шольдарович.png"
+  },
+  {
+    "id": "elvir-martikov",
+    "name": "Эльвир Мартиков",
+    "image": "/images/characters/roll20/Эльвир Мартиков.png",
+    "sourceName": "Эльвир Мартиков",
+    "file": "Эльвир Мартиков.png"
+  },
+  {
+    "id": "ernst-larnak",
+    "name": "Эрнст Ларнак",
+    "image": "/images/characters/roll20/Эрнст Ларнак.png",
+    "sourceName": "Эрнст Ларнак",
+    "file": "Эрнст Ларнак.png"
+  },
+  {
+    "id": "esher",
+    "name": "Эшер",
+    "image": "/images/characters/roll20/Эшер Беласко.png",
+    "sourceName": "Эшер Беласко",
+    "file": "Эшер Беласко.png"
+  },
+  {
+    "id": "yuliya-lyuricheva",
+    "name": "Юлия Люричева",
+    "image": "/images/characters/roll20/Юлия Люричева.jpg",
+    "sourceName": "Юлия Люричева",
+    "file": "Юлия Люричева.jpg"
+  }
+]

@@ -1,0 +1,46 @@
+---
+interface Option { value: string; label: string }
+interface Props { groups?: Option[]; tags?: Option[]; places?: Option[]; sessions?: Option[]; target: string }
+const { groups = [], tags = [], places = [], sessions = [], target } = Astro.props;
+---
+<div class="filter-bar" data-filter-bar data-target={target}>
+  <label class="search"><span>Поиск</span><input type="search" placeholder="Начните вводить…" data-filter-search /></label>
+  {groups.length > 0 && <label><span>Группа</span><select data-filter="group"><option value="">Все группы</option>{groups.map((item)=><option value={item.value}>{item.label}</option>)}</select></label>}
+  {sessions.length > 0 && <label><span>Серия</span><select data-filter="session"><option value="">Все серии</option>{sessions.map((item)=><option value={item.value}>{item.label}</option>)}</select></label>}
+  {places.length > 0 && <label><span>Место</span><select data-filter="place"><option value="">Все места</option>{places.map((item)=><option value={item.value}>{item.label}</option>)}</select></label>}
+  {tags.length > 0 && <label><span>Тег</span><select data-filter="tag"><option value="">Все теги</option>{tags.map((item)=><option value={item.value}>{item.label}</option>)}</select></label>}
+  <button type="button" data-filter-reset>Сбросить</button>
+  <p class="count" data-filter-count aria-live="polite"></p>
+</div>
+<script>
+  document.querySelectorAll<HTMLElement>('[data-filter-bar]').forEach((bar) => {
+    const target = document.querySelector<HTMLElement>(bar.dataset.target || '');
+    if (!target) return;
+    const cards = [...target.querySelectorAll<HTMLElement>('[data-filter-item]')];
+    const search = bar.querySelector<HTMLInputElement>('[data-filter-search]');
+    const selects = [...bar.querySelectorAll<HTMLSelectElement>('[data-filter]')];
+    const count = bar.querySelector<HTMLElement>('[data-filter-count]');
+    const apply = () => {
+      const query = search?.value.trim().toLocaleLowerCase('ru') || '';
+      let visible = 0;
+      cards.forEach((card) => {
+        const matchesText = !query || (card.dataset.search || card.textContent || '').toLocaleLowerCase('ru').includes(query);
+        const matchesFilters = selects.every((select) => !select.value || (card.dataset[select.dataset.filter || ''] || '').split('|').includes(select.value));
+        const show = matchesText && matchesFilters;
+        card.hidden = !show;
+        if (show) visible += 1;
+      });
+      if (count) count.textContent = `Показано: ${visible} из ${cards.length}`;
+    };
+    search?.addEventListener('input', apply);
+    selects.forEach((select) => select.addEventListener('change', apply));
+    bar.querySelector('[data-filter-reset]')?.addEventListener('click', () => { if (search) search.value=''; selects.forEach((select)=>select.value=''); apply(); });
+    const initialTag = new URLSearchParams(location.search).get('tag');
+    const tagSelect = bar.querySelector<HTMLSelectElement>('[data-filter="tag"]');
+    if (initialTag && tagSelect) tagSelect.value = initialTag;
+    apply();
+  });
+</script>
+<style>
+  .filter-bar{display:grid;grid-template-columns:2fr repeat(3,minmax(130px,1fr)) auto;gap:.7rem;align-items:end;margin-bottom:1.4rem;padding:1rem;border:1px solid var(--border);background:var(--bg-soft)}label{display:grid;gap:.3rem}label span{color:var(--gold);font-size:.66rem;text-transform:uppercase;letter-spacing:.09em}input,select{width:100%;min-height:42px;padding:.55rem .7rem;border:1px solid var(--border);border-radius:0;color:var(--text-main);background:#12110f;font:inherit;font-size:.8rem}button{min-height:42px;padding:.55rem .85rem;border:1px solid var(--border);color:var(--text-muted);background:transparent;cursor:pointer}button:hover{color:var(--gold);border-color:var(--gold)}.count{grid-column:1/-1;margin:0;color:var(--text-muted);font-size:.72rem}@media(max-width:900px){.filter-bar{grid-template-columns:1fr 1fr}}@media(max-width:520px){.filter-bar{grid-template-columns:1fr}}
+</style>
