@@ -1,9 +1,9 @@
 {
-  "diaryFont": "bad-script",
+  "diaryFont": "neucha",
   "diaryFontSize": 23,
   "diaryLineHeight": 1.3,
   "diaryParagraphGap": 1.3,
   "diaryPagePadding": 52,
-  "diaryPaper": "aged",
+  "diaryPaper": "dark",
   "diaryInk": "faded"
 }
